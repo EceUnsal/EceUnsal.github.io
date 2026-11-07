@@ -108,6 +108,8 @@ window.I18N_EN = {
   "info.privacy.d": "There's no need to put detailed health information in the booking note; the assessment happens in the session.",
   "info.privacy.l": "Privacy notice (KVKK, in Turkish)",
   "booking.loading": "Loading the booking calendar… If it doesn't appear, use \"Open calendar in a new tab\".",
+  "booking.note": "Calendar not showing or showing an error?",
+  "booking.note.l": "Open the booking page in a new tab →",
   "contact.cal": "Open calendar in a new tab",
   "contact.cal.d": "Google Calendar booking page",
   "contact.mail": "Email",

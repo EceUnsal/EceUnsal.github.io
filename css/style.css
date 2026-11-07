@@ -318,3 +318,5 @@ p { margin: 0 0 1em; }
   .lang button { padding: 6px 8px; }
   .nav__toggle { width: 40px; height: 40px; }
 }
+.booking__note { margin: 0 0 12px; font-size: .92rem; color: var(--ink-soft); }
+.booking__note a { color: var(--sage-dark); font-weight: 600; }
