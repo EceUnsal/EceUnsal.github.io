@@ -121,18 +121,22 @@ p { margin: 0 0 1em; }
 .chips li { display: inline-flex; align-items: center; gap: 6px; background: var(--white); border: 1px solid var(--line); padding: 7px 14px; border-radius: 999px; font-weight: 500; font-size: .92rem; color: var(--sage-dark); }
 .hero__actions { display: flex; flex-wrap: wrap; gap: 12px; }
 
-.hero__visual { position: relative; display: grid; place-items: center; min-height: 380px; }
+.hero__visual { position: relative; display: grid; place-items: center; min-height: 460px; }
 .hero__visual::before { content: ""; position: absolute; width: 330px; height: 330px; border-radius: 42% 58% 55% 45% / 50% 45% 55% 50%; background: linear-gradient(135deg, var(--sage) 0%, var(--teal) 100%); animation: morph 12s ease-in-out infinite; }
 .hero__card { position: relative; background: var(--white); border-radius: 28px; padding: 28px 32px; text-align: center; box-shadow: var(--shadow); display: flex; flex-direction: column; align-items: center; gap: 2px; }
 .hero__card img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid var(--peach-soft); margin-bottom: 12px; }
 .hero__card strong { font-family: var(--font-head); font-size: 1.2rem; }
 .hero__card span { color: var(--ink-soft); font-size: .9rem; }
 .float { position: absolute; display: flex; align-items: center; gap: 8px; background: var(--white); padding: 10px 16px; border-radius: 14px; box-shadow: var(--shadow); font-weight: 600; font-size: .88rem; animation: bob 5s ease-in-out infinite; }
-.float--a { top: 22px; left: 0; }
-.float--b { bottom: 40px; right: -6px; animation-delay: -1.6s; }
-.float--c { bottom: 6px; left: 20px; animation-delay: -3.2s; }
+.float { white-space: nowrap; z-index: 1; }
+.float--a { top: 6px; left: 0; }
+.float--b { top: 46px; right: -10px; animation-delay: -1s; }
+.float--c { top: 46%; left: -24px; animation-delay: -2s; }
+.float--d { top: 58%; right: -24px; animation-delay: -3s; }
+.float--e { bottom: 40px; left: 0; animation-delay: -4s; }
+.float--f { bottom: 0; right: 6px; animation-delay: -2.5s; }
 .dot { width: 10px; height: 10px; border-radius: 50%; }
-.dot--peach { background: var(--peach); } .dot--yellow { background: #E9CF5B; } .dot--teal { background: var(--teal); }
+.dot--peach { background: var(--peach); } .dot--yellow { background: #E9CF5B; } .dot--teal { background: var(--teal); } .dot--sky { background: #7CC3E6; } .dot--sage { background: var(--sage); }
 @keyframes bob { 50% { transform: translateY(-8px); } }
 @keyframes morph { 50% { border-radius: 55% 45% 40% 60% / 45% 60% 40% 55%; transform: rotate(8deg); } }
 
@@ -154,7 +158,6 @@ p { margin: 0 0 1em; }
 .card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
 .card { display: flex; flex-direction: column; }
 .card p { color: var(--ink-soft); margin: 0; font-size: .97rem; }
-.card .card__proof { margin-top: auto; padding-top: 14px; font-size: .84rem; color: var(--sage-dark); font-weight: 600; }
 .card__icon { width: 54px; height: 54px; border-radius: 16px; display: grid; place-items: center; margin-bottom: 18px; color: var(--ink); }
 .card__icon svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .card__icon--sage { background: var(--sage-soft); color: var(--sage-dark); }
@@ -260,7 +263,7 @@ p { margin: 0 0 1em; }
   .about__grid { grid-template-columns: 1fr; }
   .about__photo { position: static; max-width: 420px; margin: 0 auto; width: 100%; }
   .booking__box { grid-template-columns: 1fr; }
-  .booking__contact { grid-template-columns: repeat(3, 1fr); }
+  .booking__contact { grid-template-columns: repeat(2, 1fr); }
   .booking__calendar iframe { height: 760px; }
 }
 @media (max-width: 860px) {
@@ -277,15 +280,16 @@ p { margin: 0 0 1em; }
   .nav__links a:not(.btn) { padding: 14px 4px; border-bottom: 1px solid var(--line); font-size: 1rem; }
   .nav__cta { margin-top: 14px; }
   .hero__grid, .intro__grid { grid-template-columns: 1fr; }
-  .hero__visual { min-height: 340px; }
   .modes { grid-template-columns: 1fr; }
 }
 @media (max-width: 560px) {
   .cards, .certs, .steps { grid-template-columns: 1fr; }
   .booking__contact, .info { grid-template-columns: 1fr; }
   .hero__visual::before { width: 270px; height: 270px; }
-  .float { font-size: .8rem; padding: 8px 12px; }
-  .float--b { right: 0; }
+  .hero__visual { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; min-height: 0; padding-top: 24px; place-items: stretch; }
+  .hero__visual::before { top: 0; left: calc(50% - 135px); }
+  .hero__card { grid-column: 1 / -1; justify-self: center; margin-bottom: 14px; }
+  .float { position: static; animation: none; font-size: .8rem; padding: 9px 10px; white-space: normal; justify-content: flex-start; }
   .timeline li { grid-template-columns: 1fr; gap: 2px; }
   .hero__actions .btn { flex: 1 1 auto; }
   .logo { font-size: 1.05rem; }
@@ -320,3 +324,7 @@ p { margin: 0 0 1em; }
 }
 .booking__note { margin: 0 0 12px; font-size: .92rem; color: var(--ink-soft); }
 .booking__note a { color: var(--sage-dark); font-weight: 600; }
+.contact--li .ico { background: var(--sky-soft); color: #2F6E95; }
+.card--featured { background: linear-gradient(160deg, var(--yellow-soft), var(--white) 70%); border: 2px solid #EBD77C; }
+.tags { list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.tags li { background: var(--white); border: 1px solid #E3CD6A; color: #6E5B0E; font-weight: 600; font-size: .86rem; padding: 6px 12px; border-radius: 999px; }
