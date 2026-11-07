@@ -17,6 +17,12 @@
   });
   var titles = { tr: document.title, en: "Ece Ünsal, PT | Home and Online Physiotherapy in Isparta" };
 
+  /* Google takvimi sitenin dilinde açılsın (hl=tr / hl=en) */
+  var calBase = (document.getElementById("randevu").dataset.calendarUrl || "").trim();
+  function calendarSrc() {
+    return calBase + (calBase.indexOf("?") > -1 ? "&" : "?") + "hl=" + currentLang;
+  }
+
   function t(key) { var d = currentLang === "en" ? EN : TR; return d[key] != null ? d[key] : TR[key]; }
 
   function setLang(lang) {
@@ -26,7 +32,11 @@
       attrPairs(el).forEach(function (p) { var v = t(p[1]); if (v != null) el.setAttribute(p[0], v); });
     });
     var frame = document.querySelector("#calendar iframe");
-    if (frame) frame.title = t("a.calendar");
+    if (frame) {
+      frame.title = t("a.calendar");
+      var want = calendarSrc();
+      if (frame.src !== want) frame.src = want;
+    }
     root.lang = lang;
     document.title = titles[lang];
     document.querySelectorAll(".lang button").forEach(function (b) {
@@ -103,9 +113,7 @@
   lb.addEventListener("close", function () { lbImg.removeAttribute("src"); });
 
   /* ---------- Google Takvim randevu ---------- */
-  var booking = document.getElementById("randevu");
-  var calUrl = (booking.dataset.calendarUrl || "").trim();
-  if (/^https:\/\/calendar\.google\.com\//.test(calUrl)) {
+  if (/^https:\/\/calendar\.google\.com\//.test(calBase)) {
     var cal = document.getElementById("calendar");
     var frame = document.createElement("iframe");
     frame.title = t("a.calendar");
@@ -115,7 +123,7 @@
       var ph = cal.querySelector(".booking__placeholder");
       if (ph) ph.remove();
     });
-    frame.src = calUrl;
+    frame.src = calendarSrc();
     cal.appendChild(frame);
   }
 })();

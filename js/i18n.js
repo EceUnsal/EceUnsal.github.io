@@ -120,6 +120,7 @@ window.I18N_EN = {
   "a.mailto": "mailto:fzteceunsal@gmail.com?subject=Appointment%20request",
   "a.cert": "Certificate",
   "a.close": "Close",
+  "a.calfull": "https://calendar.google.com/calendar/appointments/schedules/AcZssZ0wVxlmBCxC7STQbPoxol2M3cBVi5kLYka5JTKVJxs_bL9oXaT3PkZYJWXD_wVTPwJgVdXz1VLa?hl=en",
   "a.calendar": "Booking calendar"
 };
 
