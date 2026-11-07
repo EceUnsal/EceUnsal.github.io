@@ -104,6 +104,7 @@
   document.querySelectorAll(".cert[data-full]").forEach(function (b) {
     b.addEventListener("click", function () {
       lbImg.src = b.dataset.full;
+      lb.querySelector(".lightbox__full").href = b.dataset.full;
       lbImg.alt = b.querySelector("strong").textContent + " – " + b.querySelector(".cert__meta").textContent;
       if (typeof lb.showModal === "function") lb.showModal(); else window.open(b.dataset.full, "_blank");
     });

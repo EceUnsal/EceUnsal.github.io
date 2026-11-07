@@ -35,8 +35,8 @@ window.I18N_EN = {
   "services.title": "How can I help you?",
   "s1.t": "Orthopaedic & Manual Therapy",
   "s1.d": "Low back, neck, back, shoulder, knee and hip pain; pre- and post-operative rehabilitation. Mobilisation and manipulation techniques, trigger point, Graston and electrotherapy.",
-  "s2.t": "Clinical Pilates & Reformer",
-  "s2.d": "One-to-one, controlled and personalised clinical Pilates for posture problems, core weakness and chronic pain.",
+  "s2.t": "Clinical Pilates (Mat)",
+  "s2.d": "One-to-one, personalised mat-based clinical Pilates at home or online for posture problems, core weakness and chronic pain.",
   "s3.t": "Kinesio Taping & Sports Injuries",
   "s3.d": "Assessment of sports injuries, kinesiology taping, exercise and a return-to-activity programme.",
   "s4.t": "Neurological Rehabilitation",
@@ -120,6 +120,7 @@ window.I18N_EN = {
   "a.mailto": "mailto:fzteceunsal@gmail.com?subject=Appointment%20request",
   "a.cert": "Certificate",
   "a.close": "Close",
+  "lb.full": "Open full size ↗",
   "a.calfull": "https://calendar.google.com/calendar/appointments/schedules/AcZssZ0wVxlmBCxC7STQbPoxol2M3cBVi5kLYka5JTKVJxs_bL9oXaT3PkZYJWXD_wVTPwJgVdXz1VLa?hl=en",
   "a.calendar": "Booking calendar"
 };

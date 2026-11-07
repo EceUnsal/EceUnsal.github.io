@@ -28,7 +28,7 @@
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <script type="application/ld+json">
   {
@@ -37,10 +37,10 @@
     "name": "Fzt. Ece Ünsal",
     "url": "https://eceunsal.github.io/",
     "image": "https://eceunsal.github.io/assets/img/og-image.jpg",
-    "email": "mailto:fzteceunsal@gmail.com",
+    "email": "fzteceunsal@gmail.com",
     "areaServed": { "@type": "City", "name": "Isparta" },
     "sameAs": ["https://instagram.com/fzteceunsal", "https://www.linkedin.com/in/ece-%C3%BCnsal-226831385/"],
-    "founder": { "@type": "Person", "name": "Ece Ünsal", "jobTitle": "Fizyoterapist", "alumniOf": "Süleyman Demirel Üniversitesi" }
+    "founder": { "@type": "Person", "name": "Ece Ünsal", "jobTitle": "Fizyoterapist", "alumniOf": { "@type": "CollegeOrUniversity", "name": "Süleyman Demirel Üniversitesi" } }
   }
   </script>
 </head>
@@ -142,8 +142,8 @@
           </article>
           <article class="card reveal">
             <div class="card__icon card__icon--teal" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><path d="M4 20h16M7 20l3-8 4 2 3-6"/></svg></div>
-            <h3 data-i18n="s2.t">Klinik Pilates & Reformer</h3>
-            <p data-i18n="s2.d">Postür bozuklukları, core zayıflığı ve kronik ağrılar için birebir, kontrollü ve kişiye özel klinik pilates çalışmaları.</p>
+            <h3 data-i18n="s2.t">Klinik Pilates (Mat)</h3>
+            <p data-i18n="s2.d">Postür bozuklukları, core zayıflığı ve kronik ağrılar için evde veya online, birebir ve kişiye özel mat üzerinde klinik pilates çalışmaları.</p>
           </article>
           <article class="card reveal">
             <div class="card__icon card__icon--peach" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19L19 5M8 4l12 12M4 8l12 12"/></svg></div>
@@ -321,6 +321,7 @@
   <dialog class="lightbox" id="lightbox" data-i18n-attr="aria-label:a.cert" aria-label="Sertifika">
     <button type="button" class="lightbox__close" data-i18n-attr="aria-label:a.close" aria-label="Kapat">×</button>
     <img src="" alt="">
+    <a class="lightbox__full" href="#" target="_blank" rel="noopener" data-i18n="lb.full">Tam boyutta aç ↗</a>
   </dialog>
 
   <script src="js/i18n.js"></script>
