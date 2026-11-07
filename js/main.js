@@ -1,27 +1,34 @@
 (function () {
-  document.documentElement.classList.add("js");
+  var root = document.documentElement;
+  root.classList.add("js");
+  var EN = window.I18N_EN || {};
+  var currentLang = "tr";
 
   /* ---------- Dil (TR / EN) ---------- */
-  var nodes = document.querySelectorAll("[data-i18n]");
-  var tr = {};
-  nodes.forEach(function (el) { tr[el.dataset.i18n] = el.textContent; });
-  var meta = {
-    tr: { title: document.title, nav: "Menü", prev: "Önceki", next: "Sonraki", close: "Kapat" },
-    en: { title: "Ece Ünsal, PT | Physiotherapist in Isparta · Home & Online", nav: "Menu", prev: "Previous", next: "Next", close: "Close" }
-  };
+  var textNodes = document.querySelectorAll("[data-i18n]");
+  var attrNodes = document.querySelectorAll("[data-i18n-attr]");
+  var TR = Object.assign({}, window.I18N_TR_EXTRA || {});
+  textNodes.forEach(function (el) { TR[el.dataset.i18n] = el.textContent; });
+  function attrPairs(el) {
+    return el.dataset.i18nAttr.split(",").map(function (p) { return p.split(":"); });
+  }
+  attrNodes.forEach(function (el) {
+    attrPairs(el).forEach(function (p) { TR[p[1]] = el.getAttribute(p[0]); });
+  });
+  var titles = { tr: document.title, en: "Ece Ünsal, PT | Home and Online Physiotherapy in Isparta" };
+
+  function t(key) { var d = currentLang === "en" ? EN : TR; return d[key] != null ? d[key] : TR[key]; }
 
   function setLang(lang) {
-    var dict = lang === "en" ? window.I18N_EN || {} : tr;
-    nodes.forEach(function (el) {
-      var v = dict[el.dataset.i18n];
-      if (v != null) el.textContent = v;
+    currentLang = lang;
+    textNodes.forEach(function (el) { var v = t(el.dataset.i18n); if (v != null) el.textContent = v; });
+    attrNodes.forEach(function (el) {
+      attrPairs(el).forEach(function (p) { var v = t(p[1]); if (v != null) el.setAttribute(p[0], v); });
     });
-    document.documentElement.lang = lang;
-    document.title = meta[lang].title;
-    document.getElementById("navToggle").setAttribute("aria-label", meta[lang].nav);
-    document.querySelector('.slider__btn[data-dir="-1"]').setAttribute("aria-label", meta[lang].prev);
-    document.querySelector('.slider__btn[data-dir="1"]').setAttribute("aria-label", meta[lang].next);
-    document.querySelector(".lightbox__close").setAttribute("aria-label", meta[lang].close);
+    var frame = document.querySelector("#calendar iframe");
+    if (frame) frame.title = t("a.calendar");
+    root.lang = lang;
+    document.title = titles[lang];
     document.querySelectorAll(".lang button").forEach(function (b) {
       b.setAttribute("aria-pressed", String(b.dataset.lang === lang));
     });
@@ -33,16 +40,30 @@
   var saved = null;
   try { saved = localStorage.getItem("lang"); } catch (e) {}
   if (saved === "en") setLang("en");
+  root.classList.remove("lang-pending");
 
   /* ---------- Mobil menü ---------- */
   var toggle = document.getElementById("navToggle");
   var links = document.getElementById("navLinks");
-  function closeMenu() { links.classList.remove("is-open"); toggle.setAttribute("aria-expanded", "false"); }
+  function isOpen() { return links.classList.contains("is-open"); }
+  function closeMenu(returnFocus) {
+    if (!isOpen()) return;
+    links.classList.remove("is-open");
+    toggle.setAttribute("aria-expanded", "false");
+    if (returnFocus) toggle.focus();
+  }
   toggle.addEventListener("click", function () {
     var open = links.classList.toggle("is-open");
     toggle.setAttribute("aria-expanded", String(open));
+    if (open) links.querySelector("a").focus();
   });
-  links.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", closeMenu); });
+  links.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", function () { closeMenu(false); }); });
+  document.addEventListener("click", function (e) {
+    if (isOpen() && !links.contains(e.target) && !toggle.contains(e.target)) closeMenu(false);
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closeMenu(true);
+  });
 
   /* ---------- Kaydırınca menü gölgesi ---------- */
   var nav = document.querySelector(".nav");
@@ -52,7 +73,8 @@
 
   /* ---------- Görünme animasyonu ---------- */
   var reveals = document.querySelectorAll(".reveal");
-  if ("IntersectionObserver" in window) {
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if ("IntersectionObserver" in window && !reduce) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (e.isIntersecting) { e.target.classList.add("is-visible"); io.unobserve(e.target); }
@@ -62,83 +84,38 @@
   } else {
     reveals.forEach(function (el) { el.classList.add("is-visible"); });
   }
+  window.addEventListener("beforeprint", function () {
+    reveals.forEach(function (el) { el.classList.add("is-visible"); });
+  });
 
-  /* ---------- Sertifika lightbox ---------- */
+  /* ---------- Sertifika lightbox (<dialog>) ---------- */
   var lb = document.getElementById("lightbox");
   var lbImg = lb.querySelector("img");
-  var lastFocus = null;
-  function openLb(src) {
-    lastFocus = document.activeElement;
-    lbImg.src = src;
-    lb.hidden = false;
-    document.body.style.overflow = "hidden";
-    lb.querySelector(".lightbox__close").focus();
-  }
-  function closeLb() {
-    lb.hidden = true;
-    lbImg.src = "";
-    document.body.style.overflow = "";
-    if (lastFocus) lastFocus.focus();
-  }
   document.querySelectorAll(".cert[data-full]").forEach(function (b) {
-    b.addEventListener("click", function () { openLb(b.dataset.full); });
-  });
-  lb.addEventListener("click", function (e) { if (e.target !== lbImg) closeLb(); });
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") { if (!lb.hidden) closeLb(); closeMenu(); }
-  });
-
-  /* ---------- Yorum kaydırıcı ---------- */
-  var slider = document.getElementById("slider");
-  var track = slider.querySelector(".slider__track");
-  var slides = track.children;
-  var dotsWrap = slider.querySelector(".slider__dots");
-  var current = 0, timer = null;
-  for (var i = 0; i < slides.length; i++) {
-    var d = document.createElement("button");
-    d.type = "button";
-    d.setAttribute("role", "tab");
-    d.setAttribute("aria-label", String(i + 1));
-    d.addEventListener("click", (function (n) { return function () { go(n); restart(); }; })(i));
-    dotsWrap.appendChild(d);
-  }
-  function go(n) {
-    current = (n + slides.length) % slides.length;
-    track.style.transform = "translateX(" + (-100 * current) + "%)";
-    dotsWrap.querySelectorAll("button").forEach(function (b, idx) {
-      b.setAttribute("aria-selected", String(idx === current));
+    b.addEventListener("click", function () {
+      lbImg.src = b.dataset.full;
+      lbImg.alt = b.querySelector("strong").textContent + " – " + b.querySelector(".cert__meta").textContent;
+      if (typeof lb.showModal === "function") lb.showModal(); else window.open(b.dataset.full, "_blank");
     });
-  }
-  function restart() {
-    clearInterval(timer);
-    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      timer = setInterval(function () { go(current + 1); }, 7000);
-    }
-  }
-  slider.querySelectorAll(".slider__btn").forEach(function (b) {
-    b.addEventListener("click", function () { go(current + Number(b.dataset.dir)); restart(); });
   });
-  var startX = null;
-  track.addEventListener("touchstart", function (e) { startX = e.touches[0].clientX; }, { passive: true });
-  track.addEventListener("touchend", function (e) {
-    if (startX === null) return;
-    var dx = e.changedTouches[0].clientX - startX;
-    if (Math.abs(dx) > 40) { go(current + (dx < 0 ? 1 : -1)); restart(); }
-    startX = null;
-  });
-  go(0);
-  restart();
+  lb.querySelector(".lightbox__close").addEventListener("click", function () { lb.close(); });
+  lb.addEventListener("click", function (e) { if (e.target === lb) lb.close(); });
+  lb.addEventListener("close", function () { lbImg.removeAttribute("src"); });
 
   /* ---------- Google Takvim randevu ---------- */
   var booking = document.getElementById("randevu");
   var calUrl = (booking.dataset.calendarUrl || "").trim();
   if (/^https:\/\/calendar\.google\.com\//.test(calUrl)) {
-    var frame = document.createElement("iframe");
-    frame.src = calUrl;
-    frame.title = "Randevu takvimi";
-    frame.loading = "lazy";
     var cal = document.getElementById("calendar");
-    cal.innerHTML = "";
+    var frame = document.createElement("iframe");
+    frame.title = t("a.calendar");
+    frame.className = "is-loading";
+    frame.addEventListener("load", function () {
+      frame.classList.remove("is-loading");
+      var ph = cal.querySelector(".booking__placeholder");
+      if (ph) ph.remove();
+    });
+    frame.src = calUrl;
     cal.appendChild(frame);
   }
 })();
