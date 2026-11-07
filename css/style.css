@@ -95,7 +95,7 @@ p { margin: 0 0 1em; }
 .nav.is-scrolled { border-color: var(--line); box-shadow: 0 4px 20px -12px rgba(0,0,0,.12); }
 .nav__inner { display: flex; align-items: center; justify-content: space-between; height: 70px; gap: 16px; }
 .logo { display: flex; align-items: center; gap: 10px; font-family: var(--font-head); font-weight: 800; font-size: 1.2rem; text-decoration: none; color: var(--ink); white-space: nowrap; }
-.logo__mark { width: 32px; height: 32px; color: var(--sage); }
+.logo__mark { width: 36px; height: 36px; color: var(--sage); flex-shrink: 0; }
 .nav__links { display: flex; align-items: center; gap: 26px; }
 .nav__links a:not(.btn) { text-decoration: none; font-weight: 500; color: var(--ink-soft); font-size: .95rem; transition: color .2s; }
 .nav__links a:not(.btn):hover { color: var(--sage-dark); }
@@ -317,7 +317,7 @@ p { margin: 0 0 1em; }
 .notfound { min-height: 100vh; display: grid; place-content: center; justify-items: center; text-align: center; padding: 24px; background: linear-gradient(180deg, var(--sage-soft), var(--white)); }
 @media (max-width: 380px) {
   .nav__inner { gap: 8px; }
-  .logo__mark { display: none; }
+  .logo__mark { width: 30px; height: 30px; }
   .logo { font-size: 1rem; }
   .lang button { padding: 6px 8px; }
   .nav__toggle { width: 40px; height: 40px; }
@@ -325,3 +325,6 @@ p { margin: 0 0 1em; }
 .booking__note { margin: 0 0 12px; font-size: .92rem; color: var(--ink-soft); }
 .booking__note a { color: var(--sage-dark); font-weight: 600; }
 .contact--li .ico { background: var(--sky-soft); color: #2F6E95; }
+@media (max-width: 340px) {
+  .logo__mark { display: none; }
+}
