@@ -42,11 +42,7 @@ window.I18N_EN = {
   "s4.t": "Neurological Rehabilitation",
   "s4.d": "Exercise and follow-up for balance, walking and daily living activities in neurological conditions.",
   "s5.t": "Paediatric Rehabilitation",
-  "s5.d": "Play-based exercise and follow-up programmes that support children's motor development.",
-  "s5.c1": "Cerebral Palsy",
-  "s5.c2": "Spina Bifida",
-  "s5.c3": "Down Syndrome",
-  "s5.c4": "SMA",
+  "s5.d": "Play-based exercise and follow-up programmes that support children's motor development in conditions such as cerebral palsy, spina bifida, Down syndrome and SMA.",
   "s6.t": "Pregnancy Exercises",
   "s6.d": "Exercise, posture and breathing work during pregnancy and after birth; support for low back pain.",
   "modes.home.t": "Home Physiotherapy · Isparta",
@@ -126,7 +122,6 @@ window.I18N_EN = {
   "a.mailto": "mailto:fzteceunsal@gmail.com?subject=Appointment%20request",
   "a.cert": "Certificate",
   "a.close": "Close",
-  "a.peds": "Conditions I work with",
   "a.calendar": "Booking calendar"
 };
 

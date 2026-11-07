@@ -325,6 +325,3 @@ p { margin: 0 0 1em; }
 .booking__note { margin: 0 0 12px; font-size: .92rem; color: var(--ink-soft); }
 .booking__note a { color: var(--sage-dark); font-weight: 600; }
 .contact--li .ico { background: var(--sky-soft); color: #2F6E95; }
-.card--featured { background: linear-gradient(160deg, var(--yellow-soft), var(--white) 70%); border: 2px solid #EBD77C; }
-.tags { list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
-.tags li { background: var(--white); border: 1px solid #E3CD6A; color: #6E5B0E; font-weight: 600; font-size: .86rem; padding: 6px 12px; border-radius: 999px; }
