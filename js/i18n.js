@@ -14,7 +14,7 @@ window.I18N_EN = {
   "hero.title2": "at home",
   "hero.title3": "or online.",
   "hero.lead": "Let's assess your complaint together and work through a treatment and exercise plan that suits you, step by step.",
-  "hero.card": "Physiotherapist · SDU",
+  "hero.card": "Physiotherapist",
   "hero.f1": "Manual Therapy",
   "hero.f2": "Clinical Pilates",
   "hero.f3": "Kinesio Taping",
