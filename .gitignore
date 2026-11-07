@@ -1,0 +1,6 @@
+# Kişisel kaynak belgeler (CV vb.) yayına girmez
+EceDoküman/
+# Yerel önizleme ayarları
+.claude/
+Thumbs.db
+desktop.ini
